@@ -1,0 +1,13 @@
+const init=require('sql.js');
+init().then(SQL=>{const db=new SQL.Database();
+const q=s=>{try{const r=db.exec(s);console.log(s,'=>',JSON.stringify(r.map(x=>x.values)))}catch(e){console.log(s,'ERR',e.message)}};
+q("select sqlite_version()");
+db.create_function('IF',(a,b,c)=>a?b:c);q("select IF(1,'a','b')");
+db.create_function('CONCAT',(...a)=>a.some(x=>x==null)?null:a.join(''));q("select CONCAT('a',1,'b'), CONCAT('a',NULL)");
+db.create_function('LEFT',(s,n)=>String(s).slice(0,n));q("select LEFT('abc',2)");
+q("create table t(a int check(a>0), b text unique)");q("insert or ignore into t values(-1,'x')");q("select count(*) from t");
+q("create table u(a,b);insert into u values(1,2)");q("select * from u full outer join t on 1=1");
+q("select * from u right join t on 1=1");
+q("select name from pragma_table_info('u')");
+q("select 7/2");
+});

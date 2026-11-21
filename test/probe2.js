@@ -1,0 +1,14 @@
+const init=require('sql.js');
+init().then(SQL=>{const db=new SQL.Database();
+const q=s=>{try{const r=db.exec(s);console.log(s,'=>',JSON.stringify(r.map(x=>x.values)))}catch(e){console.log(s,'ERR',e.message)}};
+const c=a=>a.some(x=>x==null)?null:a.join('');
+db.create_function('CONCAT',(a,b)=>c([a,b]));db.create_function('CONCAT',(a,b,d)=>c([a,b,d]));
+q("select CONCAT('a',1,'b'), CONCAT('a',NULL), concat('x','y')");
+db.create_function('RIGHT',(s,n)=>String(s).slice(-n));q("select RIGHT('abc',2)");
+db.create_function('YEAR',(s)=>s==null?null:parseInt(String(s).slice(0,4)));q("select YEAR('2024-05-01')");
+q("create table t(a int check(a>0))");q("insert or ignore into t values(-1)");q("select count(*) from t");
+const s=db.prepare("select 1 as x where 0");console.log(s.getColumnNames());s.free();
+q("PRAGMA foreign_keys=ON");q("create table p(id integer primary key);create table ch(id integer, pid integer references p(id) on delete cascade)");
+q("insert into p values(1);insert into ch values(1,1);delete from p");q("select count(*) from ch");
+q("select il.name, ii.name from pragma_index_list('ch') il, pragma_index_info(il.name) ii");
+});

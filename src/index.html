@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belajar MySQL Kilat</title>
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="btn sm" id="menuBtn" data-act="menu" aria-label="Menu">☰</button>
+  <div class="brand">Belajar MySQL <small>· persiapan tes asisten lab</small></div>
+  <div class="prog"><div class="bar"><i id="progBar"></i></div><span id="progTxt"></span></div>
+  <button class="btn sm" data-act="pg" title="Buka playground SQL bebas">⌨ Playground</button>
+  <button class="btn sm" data-act="reset" title="Kembalikan database kampus ke kondisi awal">↺ <span class="hide-m">Reset database contoh</span></button>
+  <button class="btn sm" data-act="theme" title="Ganti mode gelap/terang">◐</button>
+</header>
+<div class="layout">
+  <nav class="side" id="side"></nav>
+  <main id="main"></main>
+</div>
+<aside id="pg">
+  <div class="pgh"><b style="flex:1">Playground bebas</b><button class="btn pri sm" data-act="pgrun">▶ Jalankan</button><button class="btn sm" data-act="reset">↺ Reset DB</button><button class="btn sm" data-act="pgclose">✕</button></div>
+  <div class="pgb">
+    <p style="font-size:13.5px;color:var(--mut);margin:0 0 6px">Di sini perubahan (INSERT, UPDATE, DROP...) <b>tersimpan</b> selama halaman terbuka. Kalau berantakan, klik Reset DB. Contoh dan latihan di materi selalu jalan di salinan bersih, jadi nggak terpengaruh.</p>
+    <div id="pgEd"></div>
+    <div class="tbls" id="pgTables"></div>
+    <div class="out" id="pgOut"></div>
+  </div>
+</aside>
+<div id="loading">⏳ Memuat mesin SQL (sql.js)...</div>
+<script>
+/*JS*/
+</script>
+</body>
+</html>
